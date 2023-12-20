@@ -1,0 +1,39 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@model HackingProjekt.Pages.Account.profilePageModel
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
+
+<h2>Profil</h2>
+
+<dl>
+    <dt>Brugernavn:</dt>
+    <dd>@user.UserName</dd>
+
+    @if (User.HasClaim("15+", "true"))
+    {
+        <p>Denne Bruger kan se og lave anmendlser om film med aldergrænse 15+</p>
+        <b></b>
+        {
+            <form method="post" asp-page-handler="ToggleAdultClaimDelete">
+                <button type="submit">Slå +15 anmendelser Fra</button>
+            </form>
+        }
+    }
+    else
+    {
+        <p>Denne Bruger kan IKKE se og lave anmendlser om film med aldergrænse 15+.</p>
+        <b></b>
+        <form method="post" asp-page-handler="ToggleAdultClaimAdd">
+            <button type="submit">Slå +15 anmendelser til</button>
+        </form>
+    }
+       
+</dl>
+
+<b></b>
+
+<a asp-page="/Account/editUserName">Ændre Brugernavn</a> 

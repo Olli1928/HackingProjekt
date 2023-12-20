@@ -2,26 +2,32 @@
 using System.ComponentModel.DataAnnotations.Schema;
 namespace HackingProjekt.modelLib
 {
-    public class Movie
+    public class movie
     {
         public int Id { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         [StringLength(60, MinimumLength = 3)]
         [Required]
         public string Title { get; set; } = string.Empty;
 
         [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
+        public DateTime Udkomst { get; set; }
 
-        [Range(1, 100)]
-        [DataType(DataType.Currency)]
-        [Column(TypeName = "decimal(18, 2)")]
-        public decimal Price { get; set; }
-
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s-]*$")]
         [Required]
         [StringLength(30)]
         public string Genre { get; set; } = string.Empty;
 
-    }
+        [RegularExpression(@"^[a-zA-Z\s]*$")]
+        [Required]
+        public string Andmenelse { get; set; } = string.Empty;
+
+
+        [Required]
+        public string Forfatter { get; set; } = string.Empty;
+
+        [Required]
+        public string Aldersgrænse { get; set; } = string.Empty;
+    } 
 }

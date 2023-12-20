@@ -1,0 +1,43 @@
+﻿@page
+@model HackingProjekt.Pages.Account.AdminModel
+@{
+}
+
+<div class="justify-content-center">
+
+    <h1> Alle Brugerer</h1>
+
+    <form>
+        <p>
+            Title: <input type="text" asp-for="SearchString" />
+            <input type="submit" value="Søg" />
+        </p>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users[0].UserName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    <td>
+
+                            <a asp-page="./DeleteUser" asp-route-id="@item.Id">Delete</a>
+                        
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

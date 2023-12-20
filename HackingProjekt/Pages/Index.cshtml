@@ -1,11 +1,28 @@
 ﻿@page
-@System.Globalization.CultureInfo.CurrentUICulture
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @model IndexModel
 @{
     ViewData["Title"] = "Front Page";
+
+    var user = await UserManager.GetUserAsync(User);
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <H1 class="display-4">Velkommen, @user.UserName!</H1>
+    }
+    else
+    {
+        <h1 class="display-4">Velkommen</h1>
+    }
+
+   
+    
+    
+    
+
+ 
 </div>

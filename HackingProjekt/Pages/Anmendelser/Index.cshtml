@@ -1,0 +1,103 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity;
+@model HackingProjekt.Pages.MoviesScafold.IndexModel
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Andmendelser";
+    var user = await UserManager.GetUserAsync(User);
+}
+
+
+<h1>Anmendelser</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form>
+    <p>
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+<form method="get">
+    <label>
+        <input type="checkbox" asp-for="AldersFilter.A" /> Aldergrænse: A
+    </label>
+    <label>
+        <input type="checkbox" asp-for="AldersFilter.Syv" /> Aldergrænse: 7
+    </label>
+    <label>
+        <input type="checkbox" asp-for="AldersFilter.Elleve" /> Aldergrænse: 11
+    </label>
+    <td>
+        @{
+            bool disableCheckbox = !User.Identity.IsAuthenticated || !User.HasClaim("15+", "true");
+        }
+        @if (!disableCheckbox)
+        {
+            <label>
+                <input type="checkbox" asp-for="AldersFilter.Femten" /> Rating: 15
+            </label>
+        }
+    </td>
+    <button type="submit">Apply Filters</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Udkomst)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Forfatter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Aldersgrænse)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Movie)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Udkomst)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Forfatter)
+                </td>
+                <th>
+                    @Html.DisplayFor(model => item.Aldersgrænse)
+                </th>
+                <td>
+                    
+                    <a asp-page="./Details" asp-route-id="@item.Id">Andmenelse</a>
+
+                    @if (User.Identity.IsAuthenticated && (user.UserName == item.Forfatter || User.IsInRole("Admin")))
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Rediger</a> 
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Slet</a>
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

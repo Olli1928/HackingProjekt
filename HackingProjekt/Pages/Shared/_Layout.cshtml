@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,24 +14,63 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">HackingProjekt</a>
+                <a class="navbar-brand" style="color:black" asp-area="" asp-page="/Index">Hjem</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                       @if (SignInManager.IsSignedIn(User))
+                     {
+                      <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="navbar-brand" asp-page="/Movies/Index">Upcoming movies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand" asp-page="/Movies/Create">Add</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand" asp-page="/LoginAndSignup/Login">Login</a>
-                        </li>
+                            <a class="navbar-brand" asp-page="/Anmendelser/Index">Andmendelser</a>
+                        </li>       
+                            @if (User.IsInRole("Admin"))
+                            {<li class="nav-item">
+                                <a class="navbar-brand" asp-page="/Account/Admin">Admin side</a>
+                             </li>
+                            }
                         
-                    </ul>
+                      </ul>
+                        <ul class="navbar-nav d-flex justify-content-end">
+                            <li class="nav-item">
+                                <a class="navbar-brand" asp-page="/Account/profilePage">Profil</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="navbar-brand" asp-page="/Account/Logout" style="color:blue">Logout</a>
+                            </li>
+                            
+
+                        </ul>
+                        }
+
+                        else
+                        {
+                            <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                                <a class="navbar-brand" asp-page="/Anmendelser/Index">Andmendelser</a>
+                        </li> 
+                        </ul>
+
+                            <ul class="navbar-nav d-flex justify-content-end flex-grow-1">
+                                <li class="nav-item" >
+                                <a class="navbar-brand" asp-page="/Account/Login" asp-route-returnUrl="@Context.Request.Path" style="color:blue">Login</a>
+                                </li>
+                                <li class="nav-item ">
+                                <a class="navbar-brand " asp-page="/Account/Register" style="color:blue">Register</a>
+                                </li>
+
+                            </ul>
+
+                        }
+
+                   
+                   
+                   
+                   
+                   
                 </div>
             </div>
         </nav>

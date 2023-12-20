@@ -1,0 +1,17 @@
+﻿@page
+@model HackingProjekt.Pages.Account.editUsernameModel
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@{
+}
+
+<h2>Lav dit bugerNavn</h2>
+
+<form method="post">
+    <div>
+        <label for="newUsername">Nyt Brugernavn:</label>
+        <input type="text" id="newUsername" name="newUsername" required />
+        <span asp-validation-for="NewUsername"></span>
+    </div>
+    <button type="submit">Save</button>
+</form>

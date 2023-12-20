@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#An
+{
+   min-height: 100px;
+   min-width: 100px 
+}
