@@ -7,33 +7,29 @@
 }
 
 
-<h2>Profil</h2>
+<div class="container mt-4">
+    <h2>Profil</h2>
 
-<dl>
-    <dt>Brugernavn:</dt>
-    <dd>@user.UserName</dd>
+    <dl>
+        <dt>Brugernavn:</dt>
+        <dd>@user.UserName</dd>
 
-    @if (User.HasClaim("15+", "true"))
-    {
-        <p>Denne Bruger kan se og lave anmendlser om film med aldergrænse 15+</p>
-        <b></b>
+        @if (User.HasClaim("15+", "true"))
         {
+            <p>Denne Bruger kan se og lave anmeldelser om film med aldersgrænse 15+</p>
             <form method="post" asp-page-handler="ToggleAdultClaimDelete">
-                <button type="submit">Slå +15 anmendelser Fra</button>
+                <button type="submit" class="btn btn-danger">Slå +15 anmeldelser Fra</button>
             </form>
         }
-    }
-    else
-    {
-        <p>Denne Bruger kan IKKE se og lave anmendlser om film med aldergrænse 15+.</p>
-        <b></b>
-        <form method="post" asp-page-handler="ToggleAdultClaimAdd">
-            <button type="submit">Slå +15 anmendelser til</button>
-        </form>
-    }
-       
-</dl>
+        else
+        {
+            <p>Denne Bruger kan IKKE se og lave anmeldelser om film med aldersgrænse 15+.</p>
+            <form method="post" asp-page-handler="ToggleAdultClaimAdd">
+                <button type="submit" class="btn btn-success">Slå +15 anmeldelser til</button>
+            </form>
+        }
 
-<b></b>
+    </dl>
 
-<a asp-page="/Account/editUserName">Ændre Brugernavn</a> 
+    <a class="btn btn-primary" asp-page="/Account/editUserName">Ændre Brugernavn</a>
+</div>

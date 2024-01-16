@@ -3,41 +3,34 @@
 @{
 }
 
-<div class="justify-content-center">
+<div class="container mt-4">
+    <h1 class="text-center">Alle Brugere</h1>
 
-    <h1> Alle Brugerer</h1>
-
-    <form>
-        <p>
-            Title: <input type="text" asp-for="SearchString" />
-            <input type="submit" value="Søg" />
-        </p>
+    <form class="mb-4">
+        <div class="form-group">
+            <label for="searchString">Title:</label>
+            <input type="text" class="form-control" id="searchString" asp-for="SearchString" />
+        </div>
+        <button type="submit" class="btn btn-primary">Søg</button>
     </form>
 
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Users[0].UserName)
-                </th>
-                <th></th>
+                <th>@Html.DisplayNameFor(model => model.Users[0].UserName)</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Users)
             {
                 <tr>
+                    <td>@Html.DisplayFor(modelItem => item.UserName)</td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    <td>
-
-                            <a asp-page="./DeleteUser" asp-route-id="@item.Id">Delete</a>
-                        
-
+                        <a class="btn btn-danger" asp-page="./DeleteUser" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
 </div>

@@ -38,11 +38,11 @@ namespace HackingProjekt.Pages.Account
                var result = await UserManager.CreateAsync(user, Re.Password);
                 if( result.Succeeded)
                 {
-                     //giver bruger Admin rolle                     
+                     //giver bruger Admin rolle, (Udkomenter for at give næste bruger admin rolle.                    
                     // await UserManager.AddToRoleAsync(user, "Admin");
 
                     await SignInManager.SignInAsync(user, false);
-                    //return RedirectToPage("/editUsername");
+                    
                     return RedirectToPage("/Account/editUsername");
                 }
 

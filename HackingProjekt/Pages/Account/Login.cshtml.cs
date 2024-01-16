@@ -39,10 +39,10 @@ namespace HackingProjekt.Pages.Account
             ReturnUrl = returnUrl;
 
             if (ModelState.IsValid)
-            {
+            {   // Finder bruger med Email
                 var user = await userManager.FindByEmailAsync(Model.Email);
 
-                // If user is not found by email, try finding by username
+                // Finder bruger med BrugerNavn
                 if (user == null)
                 {
                     user = await userManager.FindByNameAsync(Model.Email);
@@ -54,7 +54,7 @@ namespace HackingProjekt.Pages.Account
 
                     if (identityResult.Succeeded)
                     {
-                        // Authentication succeeded
+                        // Authentication lykkes 
                         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                         {
                             return Redirect(returnUrl);
@@ -62,15 +62,15 @@ namespace HackingProjekt.Pages.Account
 
                         return RedirectToPage("/Index");
                     }
-
+                    //Håndterer og sender bruger til lockout siden 
                     if (identityResult.IsLockedOut)
                     {
-                        // Handle lockout
+                        
                         return RedirectToPage("./Lockout");
                     }
                 }
 
-                // Authentication failed
+                // Authentication fejlet 
                 ModelState.AddModelError("", "Email/Brugernavn eller Password er forkert");
             }
 

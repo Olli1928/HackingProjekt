@@ -21,7 +21,8 @@ namespace HackingProjekt.Pages.Account
 
             [BindProperty]
             public IdentityUser User { get; set; } = default!;
-
+               
+            //finder Bruger 
             public async Task<IActionResult> OnGetAsync(string? id)
             {
                 if (id == null || _userManager.Users == null)
@@ -44,6 +45,7 @@ namespace HackingProjekt.Pages.Account
 
         
         public async Task<IActionResult> OnPostAsync(string id)
+        //Sletter Bruger 
         {
             if (id == null || _userManager.Users == null)
             {
