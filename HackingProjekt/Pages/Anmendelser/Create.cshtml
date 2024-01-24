@@ -8,9 +8,9 @@
     var user = await UserManager.GetUserAsync(User);
 }
 
-<h1>Create</h1>
+<h1>Opslå</h1>
 
-<h4>Movie</h4>
+<h4>Andmendelse</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -45,8 +45,9 @@
             </div>
             <input asp-for="Movie.Forfatter" class="form-control" type="hidden" value="@user.UserName"/>
             <b></b>
+            <b></b>
             <div class="form-group">
-                <input type="submit" value="Skab" class="btn btn-primary" />
+                <input type="submit" value="Oplæg" class="btn btn-primary" />
             </div>
         </form>
     </div>

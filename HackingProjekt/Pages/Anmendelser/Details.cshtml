@@ -5,50 +5,26 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@Html.DisplayFor(model => model.Movie.Title)</h1>
 
 <div>
-    <h4>Movie</h4>
+    <h4>Genre: @Html.DisplayFor(model => model.Movie.Genre)</h4>
+    <h4>Af: @Html.DisplayFor(model => model.Movie.Forfatter)</h4>
+    <h5>Film Udkomst: @Html.DisplayFor(model => model.Movie.Udkomst)</h5>
+    <h5>Aldersgrænse: @Html.DisplayFor(model => model.Movie.Aldersgrænse)</h5>
+    
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Forfatter)
-        </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Forfatter)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Udkomst)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Udkomst)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Genre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Genre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Andmenelse)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Andmenelse)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Aldersgrænse)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Aldersgrænse)
+            <div class="movie-review-container">
+                @Html.Raw(Model.Movie.Andmenelse)
+            </div>
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Tilbage</a>
 </div>
+
+
+           

@@ -8,9 +8,9 @@
     var user = await UserManager.GetUserAsync(User);
 }
 
-<h1>Edit</h1>
+<h1>Rediger</h1>
 
-<h4>Movie</h4>
+<h4>Anmendelse</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -37,7 +37,6 @@
             <div class="form-group">
                 <label asp-for="Movie.Aldersgrænse" class="control-label"></label>
                 <div class="form-group">
-                    <label asp-for="Movie.Aldersgrænse" class="control-label"></label>
                     <select asp-for="Movie.Aldersgrænse" class="form-control" asp-items="@(new SelectList(Model.AldersMærker))">
                         <option value=""></option>
                     </select>
@@ -53,15 +52,16 @@
             </div>
             <input asp-for="Movie.Forfatter" class="form-control" type="hidden" value="@user.UserName" />
             <b></b>
+            <b></b>
             <div class="form-group">
-                <input type="submit" value="Skab" class="btn btn-primary" />
+                <input type="submit" value="Ændre" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="/Movies/Index">Back to List</a>
+    <a asp-page="./Index">Tilbage</a>
 </div>
 
 @section Scripts {
